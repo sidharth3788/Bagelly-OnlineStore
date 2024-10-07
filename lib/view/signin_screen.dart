@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mainproject/assets/colors/colors.dart';
 import 'package:mainproject/controller/login_controller.dart';
-import 'package:mainproject/view/support.dart';
 
 class ScreenSignIn extends StatelessWidget {
   final LoginController loginController = Get.put(LoginController());
@@ -10,15 +9,17 @@ class ScreenSignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: UIColors.main,
       body: SafeArea(
-        child: Column(
-          children: [
-            Image.asset('lib/assets/img/logo.png'),
-            Expanded(
-              child: Container(
-                height: MediaQuery.of(context).size.height - 200,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset('lib/assets/img/logo.png'),
+              Container(
+                height: screenHeight - 500,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -29,6 +30,7 @@ class ScreenSignIn extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(
                         height: 16,
@@ -67,19 +69,18 @@ class ScreenSignIn extends StatelessWidget {
                           loginController.password.value = value;
                         },
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Get.to(const ScreenSupport());
-                        },
-                        child: Text(
-                          'Forgot password?',
-                          style: TextStyle(
-                              color: Colors.grey.shade600, fontSize: 16),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Forgot password?',
+                            style: TextStyle(
+                                color: Colors.grey.shade600, fontSize: 16),
+                          ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 120,
-                      ),
+                      const Spacer(),
                       SizedBox(
                         width: double.infinity,
                         height: 60,
@@ -120,12 +121,13 @@ class ScreenSignIn extends StatelessWidget {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 16),
                     ],
                   ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -6,13 +6,15 @@ class LoginController extends GetxController {
   var password = ''.obs;
 
   final String correctUsername = 'admin';
-  final String correctPassword = 'password123';
+  final String correctPassword = 'abcd';
 
   void validateLogin() {
     if (username.value == correctUsername &&
         password.value == correctPassword) {
       Get.snackbar('Success', 'Logged in successfully!');
-      Get.off(() => const ScreenHome());
+      Get.off(
+        () => const ScreenHome(),
+      );
     } else {
       Get.snackbar('Oops', 'Login failed!');
     }

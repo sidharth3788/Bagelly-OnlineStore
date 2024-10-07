@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mainproject/assets/colors/colors.dart';
+import 'package:mainproject/controller/cart_controller.dart';
 import 'package:mainproject/view/cart_screen.dart';
+import 'package:mainproject/view/category_screen.dart';
 import 'package:mainproject/view/product_view.dart';
 
 class ScreenHome extends StatefulWidget {
@@ -13,8 +16,11 @@ class ScreenHome extends StatefulWidget {
 class ScreenHomeState extends State<ScreenHome> {
   int currentIndex = 0;
 
+  final CartController cartController = Get.put(CartController());
+
   final List<Widget> _pages = [
-    ScreenProducts(),
+    const ScreenProducts(),
+    const ScreenCategory(),
     ScreenCart(),
   ];
 
@@ -26,24 +32,24 @@ class ScreenHomeState extends State<ScreenHome> {
         selectedFontSize: 14,
         backgroundColor: Colors.white,
         currentIndex: currentIndex,
+        selectedItemColor: UIColors.main,
+        unselectedItemColor: UIColors.main,
         onTap: (index) {
           setState(() {
             currentIndex = index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: UIColors.main,
-            ),
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_cart,
-              color: UIColors.main,
-            ),
+            icon: Icon(Icons.category),
+            label: 'Category',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
             label: 'Cart',
           ),
         ],

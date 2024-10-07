@@ -14,10 +14,10 @@ class ScreenSplash extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Lets get started!',
               style: TextStyle(
-                  color: UIColors.color3,
+                  color: Colors.white,
                   fontSize: 34,
                   fontWeight: FontWeight.bold),
             ),
@@ -28,7 +28,7 @@ class ScreenSplash extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: UIColors.color2,
-                foregroundColor: UIColors.color3,
+                foregroundColor: Colors.white,
               ),
               child: const Text(
                 'continue',

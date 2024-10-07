@@ -1,10 +1,28 @@
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:mainproject/core/hive.dart';
 import 'package:mainproject/model/shop_items.dart';
 
 class CartController extends GetxController {
   var cartItems = <ShopItem, int>{}.obs;
-  double get totalPrice => cartItems.entries
-      .fold(0, (sum, entry) => sum + (entry.key.price * entry.value));
+  Box<CartItem> get cartBox => Hive.box<CartItem>('cartItems');
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadCartItems();
+  }
+
+  void _loadCartItems() {
+    for (var cartItem in cartBox.values) {
+      cartItems[cartItem.item] = cartItem.quantity;
+    }
+  }
+
+  double get totalPrice => cartItems.entries.fold(
+        0,
+        (sum, entry) => sum + (entry.key.price * entry.value),
+      );
 
   void addToCart(ShopItem item) {
     if (cartItems.containsKey(item)) {
@@ -12,6 +30,7 @@ class CartController extends GetxController {
     } else {
       cartItems[item] = 1;
     }
+    _saveCartItems();
   }
 
   void removeFromCart(ShopItem item) {
@@ -21,6 +40,16 @@ class CartController extends GetxController {
       } else {
         cartItems.remove(item);
       }
+    }
+    _saveCartItems();
+  }
+
+  void _saveCartItems() {
+    cartBox.clear();
+    for (var entry in cartItems.entries) {
+      cartBox.add(
+        CartItem(item: entry.key, quantity: entry.value),
+      );
     }
   }
 }
