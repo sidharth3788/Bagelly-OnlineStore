@@ -13,6 +13,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   http: ^1.2.2
+  marquee: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -27,3 +28,4 @@ flutter:
     - lib/assets/img/a.avif
     - lib/assets/img/b.avif
     - lib/assets/img/c.avif
+    - lib/assets/img/user.avif

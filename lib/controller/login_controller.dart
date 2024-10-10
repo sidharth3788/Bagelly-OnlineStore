@@ -6,7 +6,7 @@ class LoginController extends GetxController {
   var password = ''.obs;
 
   final String correctUsername = 'admin';
-  final String correctPassword = 'abcd';
+  final String correctPassword = '123';
 
   void validateLogin() {
     if (username.value == correctUsername &&

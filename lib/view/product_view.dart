@@ -17,8 +17,6 @@ class _ScreenProductsState extends State<ScreenProducts> {
   final ShopController shopController = Get.put(ShopController());
   final CartController cartController = Get.put(CartController());
 
-  String selectedCategory = 'All Products';
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,30 +27,16 @@ class _ScreenProductsState extends State<ScreenProducts> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16),
                 child: SizedBox(
                   height: 200,
                   child: PageView(
                     children: [
-                      _buildAdSlide('lib/assets/img/a.avif'),
                       _buildAdSlide('lib/assets/img/c.avif'),
+                      _buildAdSlide('lib/assets/img/a.avif'),
                       _buildAdSlide('lib/assets/img/b.avif'),
                     ],
                   ),
-                ),
-              ),
-              Container(
-                height: 60,
-                padding: const EdgeInsets.all(8),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _buildCategoryChip('All Products', 'All Products'),
-                    _buildCategoryChip('Mens Clothing', 'men\'s clothing'),
-                    _buildCategoryChip('Womens Clothing', 'women\'s clothing'),
-                    _buildCategoryChip('Jewelry', 'jewelery'),
-                    _buildCategoryChip('Electronics', 'electronics'),
-                  ],
                 ),
               ),
               Obx(() {
@@ -60,15 +44,9 @@ class _ScreenProductsState extends State<ScreenProducts> {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                List<ShopItem> filteredProducts = shopController.products;
-                if (selectedCategory != 'All Products') {
-                  filteredProducts = shopController.products
-                      .where((product) =>
-                          product.category == selectedCategory.toLowerCase())
-                      .toList();
-                }
+                List<ShopItem> products = shopController.products;
 
-                if (filteredProducts.isEmpty) {
+                if (products.isEmpty) {
                   return const Center(child: Text('No products available.'));
                 }
 
@@ -80,13 +58,13 @@ class _ScreenProductsState extends State<ScreenProducts> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.9,
+                      childAspectRatio: 0.83,
                       crossAxisSpacing: 4,
                       mainAxisSpacing: 4,
                     ),
-                    itemCount: filteredProducts.length,
+                    itemCount: products.length,
                     itemBuilder: (context, index) {
-                      ShopItem product = filteredProducts[index];
+                      ShopItem product = products[index];
                       return Card(
                         color: Colors.white,
                         child: InkWell(
@@ -109,7 +87,7 @@ class _ScreenProductsState extends State<ScreenProducts> {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 4),
                                 Container(
                                   height: 120,
                                   width: double.infinity,
@@ -134,7 +112,7 @@ class _ScreenProductsState extends State<ScreenProducts> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 5),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -142,10 +120,10 @@ class _ScreenProductsState extends State<ScreenProducts> {
                                     Flexible(
                                       child: Text(
                                         '\$${product.price.toString()}',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
-                                          color: UIColors.main,
+                                          color: Colors.green,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -163,9 +141,9 @@ class _ScreenProductsState extends State<ScreenProducts> {
                                           duration: const Duration(seconds: 1),
                                         );
                                       },
-                                      child: const Text(
-                                        'Add to Cart',
-                                        style: TextStyle(color: Colors.white),
+                                      child: const Icon(
+                                        Icons.shopping_cart,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ],
@@ -182,28 +160,6 @@ class _ScreenProductsState extends State<ScreenProducts> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryChip(String label, String category) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: ChoiceChip(
-        label: Text(
-          label,
-          style: TextStyle(
-            color: selectedCategory == category ? Colors.white : Colors.white,
-          ),
-        ),
-        selected: selectedCategory == category,
-        backgroundColor: UIColors.main,
-        selectedColor: UIColors.color2,
-        onSelected: (selected) {
-          setState(() {
-            selectedCategory = category;
-          });
-        },
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:mainproject/controller/cart_controller.dart';
 import 'package:mainproject/view/cart_screen.dart';
 import 'package:mainproject/view/category_screen.dart';
 import 'package:mainproject/view/product_view.dart';
+import 'package:mainproject/view/profile_screen.dart';
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
@@ -22,6 +23,7 @@ class ScreenHomeState extends State<ScreenHome> {
     const ScreenProducts(),
     const ScreenCategory(),
     ScreenCart(),
+    const ScreenProfile(),
   ];
 
   @override
@@ -30,10 +32,11 @@ class ScreenHomeState extends State<ScreenHome> {
       body: _pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 14,
-        backgroundColor: Colors.white,
+        backgroundColor: UIColors.main,
         currentIndex: currentIndex,
-        selectedItemColor: UIColors.main,
-        unselectedItemColor: UIColors.main,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           setState(() {
             currentIndex = index;
@@ -51,6 +54,10 @@ class ScreenHomeState extends State<ScreenHome> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),

@@ -17,6 +17,9 @@ class ScreenCart extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+            const SizedBox(
+              height: 16,
+            ),
             Expanded(
               child: Obx(() {
                 if (cartController.cartItems.isEmpty) {
@@ -24,7 +27,7 @@ class ScreenCart extends StatelessWidget {
                 }
 
                 return ListView.builder(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(8),
                   itemCount: cartController.cartItems.length,
                   itemBuilder: (context, index) {
                     ShopItem item =
@@ -33,9 +36,8 @@ class ScreenCart extends StatelessWidget {
 
                     return Card(
                       color: Colors.white,
-                      margin: const EdgeInsets.symmetric(vertical: 8),
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
                             ClipRRect(
@@ -51,7 +53,7 @@ class ScreenCart extends StatelessWidget {
                                 },
                               ),
                             ),
-                            const SizedBox(width: 15),
+                            const SizedBox(width: 16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

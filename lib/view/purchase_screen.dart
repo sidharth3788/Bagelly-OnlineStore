@@ -13,7 +13,7 @@ class ScreenPurchase extends StatelessWidget {
         children: [
           Center(
             child: Text(
-              'Purchase Completed',
+              'Processing...',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,

@@ -15,7 +15,9 @@ class ScreenProductDetails extends StatelessWidget {
     final CartController cartController = Get.find<CartController>();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(
           product.title,
           style: TextStyle(color: UIColors.main),

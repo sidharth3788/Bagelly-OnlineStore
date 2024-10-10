@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:mainproject/core/hive.dart';
+import 'package:mainproject/view/home_screen.dart';
 import 'package:mainproject/view/splash_screen.dart';
 
 void main() async {
